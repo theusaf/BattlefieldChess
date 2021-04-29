@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Processing 4 Alpha 3 Core">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/processing-4a3" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/lib/processing-4a3" />
+    </NATIVE>
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/processing-4a3" recursive="false" />
+  </library>
+</component>
