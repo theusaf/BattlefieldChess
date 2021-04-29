@@ -2,7 +2,7 @@
   <configuration default="false" name="Main" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="org.theusaf.BattlefieldChess.Main" />
     <module name="BattlefieldChess" />
-    <option name="PROGRAM_PARAMETERS" value="org.theusaf.ApplicationSketch" />
+    <option name="PROGRAM_PARAMETERS" value="org.theusaf.BattlefieldChess.ApplicationSketch" />
     <RunnerSettings RunnerId="Run" />
     <ConfigurationWrapper RunnerId="Run" />
     <method v="2">
