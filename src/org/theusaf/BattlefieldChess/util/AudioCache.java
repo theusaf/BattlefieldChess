@@ -17,9 +17,8 @@ public class AudioCache {
 
   public SoundFile getAudio(String key) {
     SoundFile sound = SOUND_HASH_MAP.get(key);
-    if (key == null) {
+    if (sound == null) {
       loadAudioAsynchronously(key);
-      return null;
     }
     return sound;
   }

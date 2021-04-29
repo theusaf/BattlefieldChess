@@ -1,5 +1,7 @@
 package org.theusaf.BattlefieldChess;
 
+import org.theusaf.BattlefieldChess.ui.Screen;
+import org.theusaf.BattlefieldChess.ui.screens.MainMenuScreen;
 import org.theusaf.BattlefieldChess.util.AudioCache;
 import processing.core.PApplet;
 import processing.event.MouseEvent;
@@ -10,6 +12,7 @@ import processing.event.MouseEvent;
 public class ApplicationSketch extends PApplet {
 
   private AudioCache audioCache;
+  private Screen currentScreen;
 
   public ApplicationSketch() {
     // Constructor for setting up your instance variables
@@ -26,6 +29,7 @@ public class ApplicationSketch extends PApplet {
     // Code to set up your program, load images, etc.
     surface.setTitle("Battlefield Chess");
     audioCache = new AudioCache(this);
+    currentScreen = new MainMenuScreen(this);
   }
 
   @Override

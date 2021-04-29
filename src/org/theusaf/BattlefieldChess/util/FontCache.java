@@ -2,8 +2,6 @@ package org.theusaf.BattlefieldChess.util;
 
 import processing.core.PApplet;
 import processing.core.PFont;
-import processing.core.PGraphics;
-import processing.core.PImage;
 
 import java.util.HashMap;
 
