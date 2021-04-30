@@ -35,13 +35,24 @@ public class Pawn extends Piece {
       // Check if the position is in front and is empty
       if (checkFront(position)) {
         return true;
-      } else { // Check for en passant and if the position is a valid en passant position
-        return canDoEnPassant(position);
+      } else if (canDoEnPassant(position)) { // Check for en passant and if the position is a valid en passant position
+        return true;
       }
     } else {
       // check if position is one or two squares ahead
-      return checkFront(position) || checkFrontTwoSteps(position);
+      if (checkFront(position) || checkFrontTwoSteps(position)) {
+        return true;
+      }
     }
+    return checkCapture(position);
+  }
+
+  private boolean checkCapture(Position position) {
+    int expectedY = this.position.getY() + frontDirectionMultiplier();
+    int currentX = this.position.getX();
+    return !position.isEmpty()                                              // position is not empty
+            && ((Integer) position.getY()).equals(expectedY)                // position is one row in front
+            && ((Integer) Math.abs(position.getX() - currentX)).equals(1);  // position is offset to the side by 1
   }
 
   /**
@@ -53,10 +64,10 @@ public class Pawn extends Piece {
     int currentX = this.position.getX();
     Position directFrontPosition = BOARD.getPosition(currentX, currentY + frontDirectionMultiplier());
 
-    return position.isEmpty()                 // target position is empty
-            && directFrontPosition.isEmpty()  // position 1 space ahead is empty
-            && position.getY() == expectedY   // target position is two rows ahead
-            && position.getX() == currentX;   // target position is on the same column
+    return position.isEmpty()                                // target position is empty
+            && directFrontPosition.isEmpty()                 // position 1 space ahead is empty
+            && ((Integer) position.getY()).equals(expectedY) // target position is two rows ahead
+            && ((Integer) position.getX()).equals(currentX); // target position is on the same column
   }
 
   /**
@@ -72,7 +83,7 @@ public class Pawn extends Piece {
   private boolean positionIsEnPassantPosition(Position position) {
     int currentX = this.position.getX();
     int expectedY = team == GameTeam.BLACK ? BLACK_STARTING_ROW : WHITE_STARTING_ROW;
-    return expectedY == position.getY() && ((Integer) (position.getX() - currentX)).equals(1);
+    return ((Integer) expectedY).equals(position.getY()) && ((Integer) Math.abs(position.getX() - currentX)).equals(1);
   }
 
   /**
@@ -112,7 +123,7 @@ public class Pawn extends Piece {
    */
   private boolean checkFront(Position position) {
     int y = frontDirectionMultiplier() + this.position.getY();
-    return position.getX() == this.position.getX() && y == position.getY() && position.isEmpty();
+    return ((Integer) position.getX()).equals(this.position.getX()) && ((Integer) y).equals(position.getY()) && position.isEmpty();
   }
 
   /**
