@@ -1,55 +1,25 @@
 package org.theusaf.BattlefieldChess;
 
 import org.theusaf.BattlefieldChess.ui.Screen;
-import org.theusaf.BattlefieldChess.ui.screens.MainMenuScreen;
 import org.theusaf.BattlefieldChess.util.AudioCache;
 import processing.core.PApplet;
-import processing.event.MouseEvent;
 
 /**
  * Represents the main application sketch.
  */
 public class WindowSketch extends PApplet {
 
-  private AudioCache audioCache;
-  private Screen currentScreen;
+  protected AudioCache audioCache;
+  protected Screen currentScreen;
 
   public WindowSketch() {
     // Constructor for setting up your instance variables
   }
 
   @Override
-  public void settings() {
-    // Code to set up settings, such as size, title, etc.
-    size(800, 800, P3D);
-  }
-
-  @Override
   public void setup() {
     // Code to set up your program, load images, etc.
-    surface.setTitle("Battlefield Chess");
     audioCache = new AudioCache(this);
-    currentScreen = new MainMenuScreen(this);
-  }
-
-  @Override
-  public void draw(){
-    // Code to render objects
-  }
-
-  @Override
-  public void keyPressed() {
-
-  }
-
-  @Override
-  public void mousePressed() {
-
-  }
-
-  @Override
-  public void mouseWheel(MouseEvent e) {
-
   }
 
   public AudioCache getAudioCache() {

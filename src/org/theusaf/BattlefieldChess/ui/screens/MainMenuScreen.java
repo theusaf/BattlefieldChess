@@ -1,11 +1,11 @@
 package org.theusaf.BattlefieldChess.ui.screens;
 
+import org.theusaf.BattlefieldChess.WindowSketch;
 import org.theusaf.BattlefieldChess.ui.Screen;
-import processing.core.PApplet;
 
 public class MainMenuScreen extends Screen {
 
-  public MainMenuScreen(PApplet sketch) {
+  public MainMenuScreen(WindowSketch sketch) {
     super(sketch);
   }
 
