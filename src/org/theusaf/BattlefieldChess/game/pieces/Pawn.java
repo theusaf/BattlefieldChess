@@ -35,7 +35,7 @@ public class Pawn extends Piece {
       // Check if the position is in front and is empty
       if (checkFront(position)) {
         return true;
-      } else { // Check for en passant
+      } else { // Check for en passant and if the position is a valid en passant position
         return canDoEnPassant(position);
       }
     } else {
@@ -44,39 +44,58 @@ public class Pawn extends Piece {
     }
   }
 
+  /**
+   * Returns whether the position is two steps in front and there space directly in front is empty
+   */
   private boolean checkFrontTwoSteps(Position position) {
     int currentY = this.position.getY();
+    int expectedY = currentY + frontDirectionMultiplier(2);
     int currentX = this.position.getX();
+    Position directFrontPosition = BOARD.getPosition(currentX, currentY + frontDirectionMultiplier());
+
+    return position.isEmpty()                 // target position is empty
+            && directFrontPosition.isEmpty()  // position 1 space ahead is empty
+            && position.getY() == expectedY   // target position is two rows ahead
+            && position.getX() == currentX;   // target position is on the same column
   }
 
+  /**
+   * Returns if the Pawn can do en passant.
+   */
   private boolean canDoEnPassant(Position position) {
     return inPositionToDoEnPassant() && opponentAdjacentPawnMovedTwice(position) && positionIsEnPassantPosition(position);
   }
 
+  /**
+   * Returns if the position is a position of en passant.
+   */
   private boolean positionIsEnPassantPosition(Position position) {
+    int currentX = this.position.getX();
+    int expectedY = team == GameTeam.BLACK ? BLACK_STARTING_ROW : WHITE_STARTING_ROW;
+    return expectedY == position.getY() && ((Integer) (position.getX() - currentX)).equals(1);
   }
 
+  /**
+   * Returns whether the last move was a pawn moving twice.
+   */
   private boolean opponentAdjacentPawnMovedTwice(Position position) {
     int expectedY = team == GameTeam.BLACK ? BLACK_EN_PASSANT_ROW : WHITE_EN_PASSANT_ROW;
     int expectedStartingY = team == GameTeam.BLACK ? BLACK_STARTING_ROW : WHITE_STARTING_ROW;
     int centerX = this.position.getX();
     Movement lastMove = BOARD.getLastMove();
 
-    if (lastMove == null) {
-      return false;
-    }
-    if (!(lastMove.getOriginalPiece() instanceof Pawn)) {
-      return false;
-    }
-    if (lastMove.getNewPositionAfter().getY() != expectedY) {
-      return false;
-    }
-    if (lastMove.getOriginalPosition().getY() != expectedStartingY) {
+    if (lastMove == null                                                     // no moves yet
+            || !(lastMove.getOriginalPiece() instanceof Pawn)                // piece that moved was not a pawn
+            || lastMove.getNewPositionAfter().getY() != expectedY            // pawn did not move to expected y position
+            || lastMove.getOriginalPosition().getY() != expectedStartingY) { // pawn originated from unexpected y position
       return false;
     }
     return ((Integer) Math.abs(lastMove.getNewPositionAfter().getX() - centerX)).equals(1);
   }
 
+  /**
+   * Returns whether the Pawn is in the correct row to do en passant.
+   */
   private boolean inPositionToDoEnPassant() {
     switch (team) {
       case BLACK:
@@ -88,11 +107,19 @@ public class Pawn extends Piece {
     }
   }
 
+  /**
+   * Returns whether the given position is directly in front and if the location is valid.
+   */
   private boolean checkFront(Position position) {
     int y = frontDirectionMultiplier() + this.position.getY();
     return position.getX() == this.position.getX() && y == position.getY() && position.isEmpty();
   }
 
+  /**
+   * Returns the character for the piece.
+   *
+   * @return 'P' for 'Pawn'
+   */
   @Override
   public String toString() {
     return "P";

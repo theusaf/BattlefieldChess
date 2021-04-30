@@ -25,6 +25,10 @@ public class Piece {
     return team == GameTeam.WHITE ? 1 : -1;
   }
 
+  protected int frontDirectionMultiplier(int n) {
+    return team == GameTeam.WHITE ? n : -n;
+  }
+
   public Position[] getPossiblePositions() {
     return null;
   }
