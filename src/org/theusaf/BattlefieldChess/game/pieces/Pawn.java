@@ -2,6 +2,9 @@ package org.theusaf.BattlefieldChess.game.pieces;
 
 import org.theusaf.BattlefieldChess.game.*;
 
+/**
+ * Represents a Piece that moves forwards slowly and attacks diagonally.
+ */
 public class Pawn extends Piece {
 
   private static final int BLACK_EN_PASSANT_ROW = 3;
@@ -11,21 +14,47 @@ public class Pawn extends Piece {
 
   private boolean hasMoved;
 
+  /**
+   * Constructs a Pawn (no position, default team WHITE)
+   *
+   * @param board The board the Pawn should be given a position on later
+   */
   public Pawn(Board board) {
     this(board, null, GameTeam.WHITE);
   }
 
+  /**
+   * Constructs a Pawn and places it at the specified position on the specified team.
+   * @see Piece#Piece(Board board, Position position, GameTeam team)
+   *
+   * @param board The board the Pawn is placed on
+   * @param position The Position the Pawn is located at
+   * @param team The team the Pawn is on
+   */
   public Pawn(Board board, Position position, GameTeam team) {
     super(board, position, team);
-    hasMoved = false;
+    hasMoved = false; // TODO: Verify that the piece is on the starting rank when setting this value
   }
 
+  // TODO: Override the getPossiblePositions method
+
+  /**
+   * Moves the piece to another Position.
+   *
+   * @param position The Position to move the piece to
+   */
   @Override
   public void moveTo(Position position) {
     super.moveTo(position);
     hasMoved = true;
   }
 
+  /**
+   * Checks whether a position on the board can be moved to or attacked/captured.
+   *
+   * @param position The Position to check
+   * @return Whether the specified Position can be moved to or attacked
+   */
   @Override
   public boolean canMoveTo(Position position) {
     if (!isOnBoard()) {
@@ -47,6 +76,9 @@ public class Pawn extends Piece {
     return checkCapture(position);
   }
 
+  /**
+   * Checks whether the position is a position that can be captured.
+   */
   private boolean checkCapture(Position position) {
     int expectedY = this.position.getY() + frontDirectionMultiplier();
     int currentX = this.position.getX();

@@ -35,7 +35,7 @@ public class Board {
   }
 
   public Position getPosition(int x, int y) {
-    return POSITIONS[x][y];
+    return POSITIONS[x - 1][y - 1];
   }
 
 }
