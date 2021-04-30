@@ -13,7 +13,7 @@ public class Board {
     for (int i = 0; i < POSITIONS.length; i++) {
       Position[] positionList = POSITIONS[i];
       for (int j = 0; j < positionList.length; j++) {
-        positionList[i] = new Position();
+        positionList[i] = new Position(i, j);
       }
     }
   }
