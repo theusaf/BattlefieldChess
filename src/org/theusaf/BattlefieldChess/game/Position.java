@@ -18,6 +18,10 @@ public class Position {
     return DEAD_PIECES;
   }
 
+  public boolean isEmpty() {
+    return piece == null;
+  }
+
   public Piece getPiece() {
     return piece;
   }
@@ -40,6 +44,15 @@ public class Position {
 
   public int getY() {
     return Y;
+  }
+
+  public Position copy() {
+    Position clone = new Position(X, Y);
+    if (piece != null) {
+      Piece pieceClone = piece.copy();
+      clone.setPiece(pieceClone);
+    }
+    return clone;
   }
 
 }
