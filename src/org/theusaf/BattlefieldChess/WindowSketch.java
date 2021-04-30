@@ -9,12 +9,12 @@ import processing.event.MouseEvent;
 /**
  * Represents the main application sketch.
  */
-public class ApplicationSketch extends PApplet {
+public class WindowSketch extends PApplet {
 
   private AudioCache audioCache;
   private Screen currentScreen;
 
-  public ApplicationSketch() {
+  public WindowSketch() {
     // Constructor for setting up your instance variables
   }
 

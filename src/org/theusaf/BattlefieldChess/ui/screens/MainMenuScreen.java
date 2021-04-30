@@ -3,12 +3,10 @@ package org.theusaf.BattlefieldChess.ui.screens;
 import org.theusaf.BattlefieldChess.ui.Screen;
 import processing.core.PApplet;
 
-public class MainMenuScreen implements Screen {
-
-  private final PApplet SKETCH;
+public class MainMenuScreen extends Screen {
 
   public MainMenuScreen(PApplet sketch) {
-    SKETCH = sketch;
+    super(sketch);
   }
 
   @Override

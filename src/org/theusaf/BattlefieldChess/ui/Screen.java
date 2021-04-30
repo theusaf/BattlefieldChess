@@ -1,6 +1,17 @@
 package org.theusaf.BattlefieldChess.ui;
 
-public interface Screen {
-  void draw();
-  void update();
+import processing.core.PApplet;
+
+public class Screen {
+
+  protected final PApplet SKETCH;
+
+  public Screen(PApplet sketch) {
+    SKETCH = sketch;
+  }
+
+  public void draw() {}
+
+  public void update() {}
+
 }

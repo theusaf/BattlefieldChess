@@ -1,4 +1,4 @@
-## Battlefield Chess
+# Battlefield Chess
 Inspired by Chess and Fire Emblem Heroes
 
 ### The board
@@ -71,6 +71,7 @@ Examples:
     - `M. DEF` is used against magical attacks.
 4. If the defender is still alive, it can counterattack if the original position of the attacker is in the defender's attack path.
     - This is subject to change.
+    - In this way, the opponent's piece can be defeated when it's not one's turn.
     
 ### Bonus Stats
 TODO
@@ -96,6 +97,11 @@ The King can castle if:
 - The spaces between the Rook and the King must be empty  
 - It is not under threat of attack (even if nonlethal).
 - All the squares in the path of castling are not under attack.
+
+### En Passant
+Rules to do En Passant are the same as normal chess.
+
+The pawns battle, and regardless if the defending pawn is defeated, if the attacking pawn survives (which it should always survive...), it moves to the position behind the defending pawn.
 
 ## Why?
 Clearly, this project exists just to make that scene from Code Geass possible.
