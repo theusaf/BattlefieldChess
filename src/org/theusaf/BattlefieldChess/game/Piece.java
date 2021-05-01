@@ -7,9 +7,24 @@ import org.theusaf.BattlefieldChess.util.Copyable;
  */
 public class Piece extends Copyable<Piece> {
 
+  /**
+   * The position of the piece
+   */
   protected Position position;
+
+  /**
+   * The piece's character and stats
+   */
   protected Character character;
+
+  /**
+   * The board the piece is on
+   */
   protected final Board BOARD;
+
+  /**
+   * The team the piece is on
+   */
   protected GameTeam team;
 
   /**
