@@ -25,7 +25,7 @@ public class Pawn extends Piece {
 
   /**
    * Constructs a Pawn and places it at the specified position on the specified team.
-   * @see Piece#Piece(Board board, Position position, GameTeam team)
+   * @see Piece#Piece(Board, Position, GameTeam)
    *
    * @param board The board the Pawn is placed on
    * @param position The Position the Pawn is located at
