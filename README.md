@@ -89,6 +89,433 @@ Examples:
 - Ground
     - Beats Water
     
+### Skills
+Skills are special effects that can boost pieces on the board
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Effect</th>
+            <th>Restrictions</th>
+            <th>Type</th>
+        </tr>
+        <tr>
+            <td>The name of the skill</td>
+            <td>The effect of the skill</td>
+            <td>Any restrictions to using the skill</td>
+            <td>
+                <p>Active/Passive</p>
+                <p><b>Active</b> skills are considered a move</p>
+                <p><b>Passive</b> skills affect all units that can be targeted by the piece, unless specified by restrictions</p>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th colspan="4">Special Skills</th>
+        </tr>
+        <tr>
+            <td>Heal</td>
+            <td>Restores HP of friendly units</td>
+            <td>
+                <ul>
+                    <li>User must be a staff user</li>
+                </ul>
+            </td>
+            <td>Active</td>
+        </tr>
+        <tr>
+            <td>Cheer</td>
+            <td>Enables target to have two actions in the next turn</td>
+            <td>
+                <ul>
+                    <li>Target must not have the Cheer skill</li>
+                </ul>
+            </td>
+            <td>Active</td>
+        </tr>
+        <tr>
+            <td>Swap (in consideration)</td>
+            <td>Enables the user to swap places with the target</td>
+            <td>
+                <ul>
+                    <li>The target's position must be a valid position for the user to go to</li>
+                    <li>The user's position must be a valid position for the target to go to</li>
+                </ul>
+            </td>
+            <td>Active</td>
+        </tr>
+        <tr>
+            <td>Boost Attack/Defense/Speed/M. Defense</td>
+            <td>Temporarily increases target(s) stats</td>
+            <td>
+                <ul>
+                    <li>None</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Sacrifice</td>
+            <td>Transfers health from one unit to another</td>
+            <td>
+                <ul>
+                    <li>User must have at least 11 health</li>
+                    <li>Target must not have full health</li>
+                </ul>
+            </td>
+            <td>Active</td>
+        </tr>
+        <tr>
+            <td>Cure</td>
+            <td>Removes curses from target. High levels can even turn curses into buffs</td>
+            <td>
+                <ul>
+                    <li>Target must have a curse</li>
+                </ul>
+            </td>
+            <td>Active</td>
+        </tr>
+        <tr>
+            <th colspan="3">Charge Skills</th>
+            <td>Charge skills charge each time a unit attacks (in defense or offense)</td>
+        </tr>
+        <tr>
+            <td>Life leech</td>
+            <td>Gain back a percentage of damage dealt as health</td>
+            <td>
+                <ul>
+                    <li>User cannot use a Healing Staff</li>
+                </ul>
+            </td>
+            <td>Charge</td>
+        </tr>
+        <tr>
+            <td>Penetration</td>
+            <td>When in combat, treats the opponents <code>DEF/M.DEF</code> as reduced by a percentage</td>
+            <td>
+                <ul>
+                    <li>User cannot use a Healing Staff</li>
+                </ul>
+            </td>
+            <td>Charge</td>
+        </tr>
+        <tr>
+            <td>Adrenaline Boost</td>
+            <td>When in combat, increases damage by a percentage</td>
+            <td>
+                <ul>
+                    <li>User cannot use a Healing Staff</li>
+                </ul>
+            </td>
+            <td>Charge</td>
+        </tr>
+        <tr>
+            <td>Preemptive Strike</td>
+            <td>Before attacking, the target and any units directly next to it takes damage <code>Attack - Def/M. Def</code></td>
+            <td>
+                <ul>
+                    <li>User cannot use a Healing Staff</li>
+                    <li>Enemy piece health cannot go under 1</li>
+                </ul>
+            </td>
+            <td>Charge</td>
+        </tr>
+        <tr>
+            <td>Guard</td>
+            <td>Reduces damage from an opposing piece's attack by a percent</td>
+            <td>
+                <ul>
+                    <li>User cannot use a Throwing Knife or Bow</li>
+                </ul>
+            </td>
+            <td>Charge</td>
+        </tr>
+        <tr>
+            <td>Miracle</td>
+            <td>If an opposing piece's attack would cause health to drop below 1, the piece will survive with 1 HP.</td>
+            <td>
+                <ul>
+                    <li>None</li>
+                </ul>
+            </td>
+            <td>Charge</td>
+        </tr>
+        <tr>
+            <td>Group Cheer</td>
+            <td>When healing a target, all pieces on the board gain a boost to all stats by a number for 2 turns (this turn + next turn)</td>
+            <td>
+                <ul>
+                    <li>User must use a Healing Staff</li>
+                </ul>
+            </td>
+            <td>Charge</td>
+        </tr>
+        <tr>
+            <th colspan="4">Type I Passive</th>
+        </tr>
+        <tr>
+            <td>HP/ATK/DEF/M. DEF/SPD Boost</td>
+            <td>Permanently increases stats</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Hard Hitter</td>
+            <td>Increases ATK/DEF/M. DEF/SPD during combat</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>User must initiate combat</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Thick Skin</td>
+            <td>Increases ATK/DEF/M. DEF/SPD during combat</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>Opponent piece must initiate combat</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Painful Strength</td>
+            <td>Greatly increases stats during combat</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>User's HP must be less than a percent</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Overclock</td>
+            <td>Increases/Decreases stats by a percent during combat</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>If User's advantage is greater than Opponent piece's advantage, increases stats. Else, decreases</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Teamwork</td>
+            <td>Increases ATK/DEF/M. DEF/SPD during combat</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>User must be next to another friendly piece</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Solo Leveling</td>
+            <td>Increases ATK/DEF/M. DEF/SPD during combat</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>User must not be near another friendly piece</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <th colspan="4">Type II Passive</th>
+        </tr>
+        <tr>
+            <td>Pass Through</td>
+            <td>Allows self to move through friendly pieces</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>If moving through friendlies, cannot attack or use active skills</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Ambush</td>
+            <td>Counterattack before opponent piece attacks</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>User's HP must be less than a percentage</li>
+                    <li>Opponent piece must initiate combat</li>
+                    <li>Opponent piece must be in a location that the User can attack</li>
+                    <li>User cannot use a Healing Staff</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Desperation</td>
+            <td>Perform a guaranteed secondary attack before opponent piece counters</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>User's HP must be less than a percentage</li>
+                    <li>User cannot use a Healing Staff</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Double Tap</td>
+            <td>Deal additional damage to target after combat</td>
+            <td>
+                <ul>
+                    <li>Targets opponent target</li>
+                    <li>User must initiate combat</li>
+                    <li>Target's health may not drop below 1</li>
+                    <li>User cannot use a Healing Staff</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Live to Serve</td>
+            <td>Restores health after healing someone else</td>
+            <td>
+                <ul>
+                    <li>User must use a Healing Staff</li>
+                    <li>Targets self</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Curse</td>
+            <td>Reduces ATK/DEF/M. DEF/SPD of opponent piece after combat for 3 turns</td>
+            <td>
+                <ul>
+                    <li>Targets opponent target/attacker</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Sabotage</td>
+            <td>Reduces ATK/DEF/M. DEF/SPD of opponent pieces for 2 turns</td>
+            <td>
+                <ul>
+                    <li>Targets opponent pieces that can be targeted by the User</li>
+                    <li>Target must have less stats than User</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Neutral Advantage</td>
+            <td>Cancels out weapon/elemental/unit advantages and disadvantages</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Charge</td>
+            <td>Charges up Unit's charge ability at the start of its turn</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>User must have HP higher than a percent</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Parry</td>
+            <td>Reduces damage taken by a percent</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>Opponent piece must initiate combat</li>
+                    <li>Opponent piece must be in a position targetable by the User</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Recovery</td>
+            <td>Restores health after combat</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <th colspan="4">Type III Passive</th>
+        </tr>
+        <tr>
+            <td>Battle Rest</td>
+            <td>Restores HP after combat</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Power of Friendship</td>
+            <td>Boosts friendly pieces ATK/DEF/M. DEF/SPD for 1 turn</td>
+            <td>
+                <ul>
+                    <li>Targets friendly pieces</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Threaten</td>
+            <td>Reduces opponent pieces ATK/DEF/M. DEF/SPD for 1 turn</td>
+            <td>
+                <ul>
+                    <li>Targets opponent pieces</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Poison Smoke</td>
+            <td>Reduces opponent pieces ATK/DEF/M. DEF/SPD for 1 turn after combat</td>
+            <td>
+                <ul>
+                    <li>Targets opponent pieces</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+        <tr>
+            <td>Quick Charge</td>
+            <td>Charges User's charge skill</td>
+            <td>
+                <ul>
+                    <li>Targets self</li>
+                    <li>Charge skill must be at 0 charge (not charged)</li>
+                </ul>
+            </td>
+            <td>Passive</td>
+        </tr>
+    </tbody>
+</table>
+
 ### Special Skills
 - Heal
     - Can restore HP of friendly troops as its move.
@@ -108,7 +535,6 @@ Examples:
     - `DEF` is used against physical attacks.
     - `M. DEF` is used against magical attacks.
 4. If the defender is still alive, it can counterattack if the original position of the attacker is in the defender's attack path.
-    - This is subject to change.
     - In this way, the opponent's piece can be defeated when it's not one's turn.
     
 ### Bonus Stats
