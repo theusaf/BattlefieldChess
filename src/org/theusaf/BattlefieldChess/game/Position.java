@@ -112,10 +112,21 @@ public class Position extends Copyable<Position> {
   protected Position copySpecific() {
     Position clone = new Position(X, Y);
     if (piece != null) {
-      Piece pieceClone = piece.copy();
+      Piece pieceClone = piece.copy(true);
       clone.setPiece(pieceClone);
     }
     return clone;
+  }
+
+  /**
+   * Generates a clone of the position (without cloned Piece).
+   *
+   * @param args The arguments
+   * @return A clone of the position without the piece
+   */
+  @Override
+  protected Position copySpecific(Object... args) {
+    return new Position(X, Y);
   }
 
 }

@@ -188,7 +188,7 @@ public class Piece extends Copyable<Piece> {
       clone.setCharacter(character.copy());
     }
     if (position != null) {
-      Position positionClone = position.copy();
+      Position positionClone = position.copy(true);
       positionClone.setPiece(clone);
       clone.setPosition(positionClone);
     }
