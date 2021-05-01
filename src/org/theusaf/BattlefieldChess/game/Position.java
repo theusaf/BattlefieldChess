@@ -126,7 +126,21 @@ public class Position extends Copyable<Position> {
    */
   @Override
   protected Position copySpecific(Object... args) {
+    if (args[0] instanceof Board) {
+      Position clone = copySpecific();
+      clone.getPiece().setBoard((Board) args[0]);
+      return clone;
+    }
     return new Position(X, Y);
+  }
+
+  @Override
+  public boolean equals(Object position) {
+    if (!(position instanceof Position)) {
+      return false;
+    }
+    Position other = (Position) position;
+    return ((Integer) other.getX()).equals(X) && ((Integer) other.getY()).equals(Y);
   }
 
 }

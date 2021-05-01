@@ -40,4 +40,45 @@ public class Board extends Copyable<Board> {
     return POSITIONS[x - 1][y - 1];
   }
 
+  public void setPosition(int x, int y, Position position) {
+    POSITIONS[x - 1][y - 1] = position;
+  }
+
+  @Override
+  public Board copySpecific() {
+    Board board = new Board();
+    for (Position[] rows : POSITIONS) {
+      for (Position position : rows) {
+        Position clone = position.copy(board);
+        board.setPosition(clone.getX(), clone.getY(), clone);
+      }
+    }
+    return board;
+  }
+
+  @Override
+  public Board copySpecific(Object... args) {
+    if (args[0] instanceof Piece) {
+      args[0] = ((Piece) args[0]).getPosition();
+    }
+    if (args[0] instanceof Position) {
+      Board board = new Board();
+      Position clonedPosition = (Position) args[0];
+      for (Position[] rows : POSITIONS) {
+        for (Position position : rows) {
+          Position clone;
+          if (position.equals(clonedPosition)) {
+            clone = clonedPosition;
+          } else {
+            clone = position.copy(board);
+          }
+          board.setPosition(clone.getX(), clone.getY(), clone);
+        }
+      }
+      return board;
+    } else {
+      return copySpecific();
+    }
+  }
+
 }

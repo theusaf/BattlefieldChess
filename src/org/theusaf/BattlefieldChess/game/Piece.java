@@ -20,7 +20,7 @@ public class Piece extends Copyable<Piece> {
   /**
    * The board the piece is on
    */
-  protected final Board BOARD;
+  protected Board board;
 
   /**
    * The team the piece is on
@@ -46,7 +46,7 @@ public class Piece extends Copyable<Piece> {
    * @param team The team the piece is on
    */
   public Piece(Board board, Position position, GameTeam team) {
-    BOARD = board;
+    this.board = board;
     this.position = position;
     this.team = team;
     if (position != null) {
@@ -175,15 +175,33 @@ public class Piece extends Copyable<Piece> {
   }
 
   /**
+   * Gets the board the piece is on.
+   *
+   * @return The board the piece is on
+   */
+  public Board getBoard() {
+    return board;
+  }
+
+  /**
+   * Sets the board the piece is on.
+   *
+   * @param board The board the piece is on
+   */
+  public void setBoard(Board board) {
+    this.board = board;
+  }
+
+  /**
    * Generates a clone of this piece.
    * <br>
    * The cloned piece will also contain a clone of its character and position.
-   * TODO: prevent infinite loop
    *
    * @return The clone of this piece
    */
   protected Piece copySpecific() {
-    Piece clone = new Piece(BOARD, position, team);
+//    Board board = this.board.copy();
+    Piece clone = new Piece(board, position, team);
     if (character != null) {
       clone.setCharacter(character.copy());
     }
@@ -191,6 +209,23 @@ public class Piece extends Copyable<Piece> {
       Position positionClone = position.copy(true);
       positionClone.setPiece(clone);
       clone.setPosition(positionClone);
+    }
+    return clone;
+  }
+
+  /**
+   * Generates a clone of this piece.
+   * <br>
+   * The cloned piece will not contain a clone of its position, but will contain a clone of its character.
+   *
+   * @return The clone of this piece
+   */
+  protected Piece copySpecific(Object... args) {
+    // TODO: figure out cloning boards and stuff
+//    Board board = this.board.copy();
+    Piece clone = new Piece(board, position, team);
+    if (character != null) {
+      clone.setCharacter(character.copy());
     }
     return clone;
   }

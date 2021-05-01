@@ -50,6 +50,22 @@ public class Pawn extends Piece {
   }
 
   /**
+   * Gets the possible positions the pawn could move to.
+   *
+   * @return A list of positions the pawn could move to. Could contain null.
+   */
+  @Override
+  public Position[] getPossiblePositions() {
+    int currentX = position.getX();
+    int currentY = position.getY();
+    Position directFront = board.getPosition(currentX, currentY + frontDirectionMultiplier());
+    Position frontTwoSteps = board.getPosition(currentX, currentY + frontDirectionMultiplier(2));
+    Position diagonalLeft = board.getPosition(currentX - frontDirectionMultiplier(), currentY - frontDirectionMultiplier());
+    Position diagonalRight = board.getPosition(currentX + frontDirectionMultiplier(), currentY + frontDirectionMultiplier());
+    return new Position[]{directFront, frontTwoSteps, diagonalLeft, diagonalRight};
+  }
+
+  /**
    * Checks whether a position on the board can be moved to or attacked/captured.
    *
    * @param position The Position to check
@@ -94,7 +110,7 @@ public class Pawn extends Piece {
     int currentY = this.position.getY();
     int expectedY = currentY + frontDirectionMultiplier(2);
     int currentX = this.position.getX();
-    Position directFrontPosition = BOARD.getPosition(currentX, currentY + frontDirectionMultiplier());
+    Position directFrontPosition = board.getPosition(currentX, currentY + frontDirectionMultiplier());
 
     return position.isEmpty()                                // target position is empty
             && directFrontPosition.isEmpty()                 // position 1 space ahead is empty
@@ -125,7 +141,7 @@ public class Pawn extends Piece {
     int expectedY = team == GameTeam.BLACK ? BLACK_EN_PASSANT_ROW : WHITE_EN_PASSANT_ROW;
     int expectedStartingY = team == GameTeam.BLACK ? BLACK_STARTING_ROW : WHITE_STARTING_ROW;
     int centerX = this.position.getX();
-    Movement lastMove = BOARD.getLastMove();
+    Movement lastMove = board.getLastMove();
 
     if (lastMove == null                                                     // no moves yet
             || !(lastMove.getOriginalPiece() instanceof Pawn)                // piece that moved was not a pawn
