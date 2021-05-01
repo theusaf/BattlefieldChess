@@ -24,22 +24,60 @@ Examples:
     
 ### Types of weapons
 - Staff
+    - Magical weapon
+    - Effective against cavalry
 - Healing Staff
     - If a unit has this weapon, they will not have the 'Heal' skill.
+    - Does not deal damage
 - Bow
+    - Physical weapon
+    - Effective against flying enemies
 - Spear
+    - Physical weapon
+    - Advantage over swords
 - Axe
+    - Physical weapon
+    - Advantage over spears
 - Sword
+    - Physical weapon
+    - Advantage over axes
 - Throwing Knives
+    - Lowers target's defense during combat by a percent
+    - More effective against targets using bows
+- Hand
+    - Only used by Beasts
+    - Physical attack
+- Magic Beam
+    - Only used by Demons
+    - Magic attack
 
 ### Types of pieces
 - Cavalry
+    - Advantage against:
+        - Infantry
+        - Heavy Infantry
 - Flying
+    - Advantage against:
+        - Beasts
+        - Infantry
 - Infantry
+    - Advantage against:
+        - Demons
+        - Heavy Infantry
+- Heavy Infantry
+    - Advantage against:
+        - Demons
+        - Flying
 - Beast
-    - No weapon, physical attack
-- Dragon
-    - No weapon, magic attack
+    - Must use Hand weapon
+    - Advantage against:
+        - Cavalry
+        - Heavy Infantry
+- Demons
+    - Must use Magic Beam weapon
+    - Advantage against:
+        - Beasts
+        - Cavalry
 
 ### Elemental Type
 - None
