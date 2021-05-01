@@ -1,9 +1,11 @@
 package org.theusaf.BattlefieldChess.game;
 
+import org.theusaf.BattlefieldChess.util.Copyable;
+
 /**
  * Represents a piece on the board.
  */
-public class Piece {
+public class Piece extends Copyable<Piece> {
 
   protected Position position;
   protected Character character;
@@ -165,7 +167,7 @@ public class Piece {
    *
    * @return The clone of this piece
    */
-  public Piece copy() {
+  protected Piece copySpecific() {
     Piece clone = new Piece(BOARD, position, team);
     if (character != null) {
       clone.setCharacter(character.copy());

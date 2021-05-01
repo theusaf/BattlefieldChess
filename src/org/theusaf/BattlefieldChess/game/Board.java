@@ -1,8 +1,10 @@
 package org.theusaf.BattlefieldChess.game;
 
+import org.theusaf.BattlefieldChess.util.Copyable;
+
 import java.util.ArrayList;
 
-public class Board {
+public class Board extends Copyable<Board> {
 
   private final Position[][] POSITIONS;
   private final ArrayList<Movement> MOVEMENTS;

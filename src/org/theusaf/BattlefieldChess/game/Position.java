@@ -1,11 +1,13 @@
 package org.theusaf.BattlefieldChess.game;
 
+import org.theusaf.BattlefieldChess.util.Copyable;
+
 import java.util.ArrayList;
 
 /**
  * Represents a location on a board.
  */
-public class Position {
+public class Position extends Copyable<Position> {
 
   private final int X, Y;
   private final ArrayList<Piece> DEAD_PIECES;
@@ -106,7 +108,8 @@ public class Position {
    *
    * @return The clone of this position
    */
-  public Position copy() {
+  @Override
+  protected Position copySpecific() {
     Position clone = new Position(X, Y);
     if (piece != null) {
       Piece pieceClone = piece.copy();

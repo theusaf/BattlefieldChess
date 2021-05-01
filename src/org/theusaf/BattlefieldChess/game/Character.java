@@ -1,9 +1,11 @@
 package org.theusaf.BattlefieldChess.game;
 
+import org.theusaf.BattlefieldChess.util.Copyable;
+
 /**
  * Represents a character. A character is an object that contains the various stats of the pieces.
  */
-public class Character {
+public class Character extends Copyable<Character> {
 
   private int healthPoints, defensePoints, magicDefensePoints, attackPoints, speedPoints;
   private final String NAME;
@@ -44,7 +46,7 @@ public class Character {
    *
    * @return A clone of this character
    */
-  public Character copy() {
+  protected Character copySpecific() {
     return new Character(NAME, healthPoints, defensePoints, magicDefensePoints, attackPoints, speedPoints);
   }
 
