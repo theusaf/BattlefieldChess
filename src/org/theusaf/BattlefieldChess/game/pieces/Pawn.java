@@ -59,7 +59,10 @@ public class Pawn extends Piece {
     int currentX = position.getX();
     int currentY = position.getY();
     Position directFront = board.getPosition(currentX, currentY + frontDirectionMultiplier());
-    Position frontTwoSteps = board.getPosition(currentX, currentY + frontDirectionMultiplier(2));
+    Position frontTwoSteps = null;
+    if (!hasMoved) {
+      frontTwoSteps = board.getPosition(currentX, currentY + frontDirectionMultiplier(2));
+    }
     Position diagonalLeft = board.getPosition(currentX - frontDirectionMultiplier(), currentY - frontDirectionMultiplier());
     Position diagonalRight = board.getPosition(currentX + frontDirectionMultiplier(), currentY + frontDirectionMultiplier());
     return new Position[]{directFront, frontTwoSteps, diagonalLeft, diagonalRight};
@@ -184,4 +187,11 @@ public class Pawn extends Piece {
     return "P";
   }
 
+  public boolean hasMoved() {
+    return hasMoved;
+  }
+
+  public void setHasMoved(boolean hasMoved) {
+    this.hasMoved = hasMoved;
+  }
 }
