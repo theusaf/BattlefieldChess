@@ -200,16 +200,18 @@ public class Piece extends Copyable<Piece> {
    * @return The clone of this piece
    */
   protected Piece copySpecific() {
-//    Board board = this.board.copy();
-    Piece clone = new Piece(board, position, team);
+    Piece clone = new Piece(this.board, position, team); // create new piece with current board, position, and team
+    Board board = this.board.copy(); // create a new board with cloned positions
     if (character != null) {
-      clone.setCharacter(character.copy());
+      clone.setCharacter(character.copy()); // copy character data
     }
     if (position != null) {
-      Position positionClone = position.copy(true);
-      positionClone.setPiece(clone);
-      clone.setPosition(positionClone);
+      Position positionClone = position.copy(true); // set position to a new position at same x and y
+      positionClone.setPiece(clone); // assign clone to new empty position
+      clone.setPosition(positionClone); // assign cloned position to cloned piece
+      board.setPosition(positionClone.getX(), positionClone.getY(), positionClone); // reassign cloned position to board
     }
+    clone.setBoard(board); // update board of piece
     return clone;
   }
 
@@ -217,16 +219,17 @@ public class Piece extends Copyable<Piece> {
    * Generates a clone of this piece.
    * <br>
    * The cloned piece will not contain a clone of its position, but will contain a clone of its character.
+   * The cloned board will also contain the incorrect position.
    *
    * @return The clone of this piece
    */
   protected Piece copySpecific(Object... args) {
-    // TODO: figure out cloning boards and stuff
-//    Board board = this.board.copy();
-    Piece clone = new Piece(board, position, team);
+    Piece clone = new Piece(this.board, position, team); // create a new piece with current board, team, and position
     if (character != null) {
-      clone.setCharacter(character.copy());
+      clone.setCharacter(character.copy()); // copy character data
     }
+    Board board = this.board.copy(); // create a clone of the board
+    clone.setBoard(board); // update board
     return clone;
   }
 

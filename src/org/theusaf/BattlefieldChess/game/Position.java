@@ -104,16 +104,18 @@ public class Position extends Copyable<Position> {
    * Generates a clone of the position.
    * <br>
    * The cloned position will also contain a clone of the Piece, if there was an active piece on this position.
-   * TODO: prevent infinite loop
+   * TODO: check that these cloning methods actually work
    *
    * @return The clone of this position
    */
   @Override
   protected Position copySpecific() {
-    Position clone = new Position(X, Y);
+    Position clone = new Position(X, Y); // create new position
     if (piece != null) {
-      Piece pieceClone = piece.copy(true);
-      clone.setPiece(pieceClone);
+      Piece pieceClone = piece.copy(true); // clone piece (w/o cloning position)
+      clone.setPiece(pieceClone); // update position clone piece
+      pieceClone.setPosition(clone); // update piece clone position
+      pieceClone.getBoard().setPosition(X, Y, clone); // fix position on cloned board
     }
     return clone;
   }
@@ -127,8 +129,10 @@ public class Position extends Copyable<Position> {
   @Override
   protected Position copySpecific(Object... args) {
     if (args[0] instanceof Board) {
-      Position clone = copySpecific();
-      clone.getPiece().setBoard((Board) args[0]);
+      Position clone = copySpecific(); // Creates a clone with cloned position, board, and piece
+      if (!clone.isEmpty()) {
+        clone.getPiece().setBoard((Board) args[0]); // Updates the board of the cloned piece to the specified board
+      }
       return clone;
     }
     return new Position(X, Y);
