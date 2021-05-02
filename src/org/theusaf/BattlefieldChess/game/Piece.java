@@ -1,5 +1,6 @@
 package org.theusaf.BattlefieldChess.game;
 
+import org.theusaf.BattlefieldChess.game.piecefilters.PieceMovementFilter;
 import org.theusaf.BattlefieldChess.util.Copyable;
 
 /**
@@ -16,6 +17,8 @@ public class Piece extends Copyable<Piece> {
    * The piece's character and stats
    */
   protected Character character;
+
+  protected PieceMovementFilter pieceMovementFilter;
 
   /**
    * The board the piece is on
@@ -82,12 +85,37 @@ public class Piece extends Copyable<Piece> {
     return team == GameTeam.WHITE ? n : -n;
   }
 
-  /**
-   * Gets all plausible positions the piece can move to.
-   *
-   * @return A list of positions the piece can theoretically move to
-   */
-  public Position[] getPossiblePositions() {
+  public Position[] getAttackablePositions() {
+    if (pieceMovementFilter != null) {
+      return pieceMovementFilter.attackable();
+    } else {
+      return null;
+    }
+  }
+
+  public Position[] getMovablePositions() {
+    if (pieceMovementFilter != null) {
+      return pieceMovementFilter.movable();
+    } else {
+      return null;
+    }
+  }
+
+  public Position[] getTheoreticalPositions() {
+    if (pieceMovementFilter != null) {
+      return pieceMovementFilter.theoretical();
+    } else {
+      return null;
+    }
+  }
+
+  // TODO: Implement this
+  public Position[] getSpecialActivePositions() {
+    return null;
+  }
+
+  // TODO: Implement this
+  public Position[] getSpecialPassivePositions() {
     return null;
   }
 
