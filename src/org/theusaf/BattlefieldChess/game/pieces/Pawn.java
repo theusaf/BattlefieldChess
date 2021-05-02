@@ -1,11 +1,14 @@
 package org.theusaf.BattlefieldChess.game.pieces;
 
 import org.theusaf.BattlefieldChess.game.*;
+import org.theusaf.BattlefieldChess.game.piecefilters.PawnMovementFilter;
 
 /**
  * Represents a Piece that moves forwards slowly and attacks diagonally.
  */
 public class Pawn extends Piece {
+
+  private boolean hasMoved;
 
   /**
    * Constructs a Pawn (no position, default team WHITE)
@@ -26,6 +29,21 @@ public class Pawn extends Piece {
    */
   public Pawn(Board board, Position position, GameTeam team) {
     super(board, position, team);
+    pieceMovementFilter = new PawnMovementFilter(this);
+  }
+
+  @Override
+  public void moveTo(Position position) {
+    super.moveTo(position);
+    hasMoved = true;
+  }
+
+  public boolean hasMoved() {
+    return hasMoved;
+  }
+
+  public void setHasMoved(boolean hasMoved) {
+    this.hasMoved = hasMoved;
   }
 
   /**
