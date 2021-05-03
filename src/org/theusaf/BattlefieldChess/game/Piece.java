@@ -154,6 +154,12 @@ public class Piece extends Copyable<Piece> {
     return position;
   }
 
+  public Position getPositionRelative(int horizontal, int vertical) {
+    int updatedX = horizontal + frontDirectionMultiplier(horizontal);
+    int updatedY = vertical + frontDirectionMultiplier(vertical);
+    return board.getPosition(updatedX, updatedY);
+  }
+
   /**
    * Puts the piece on the given position.
    * <br>

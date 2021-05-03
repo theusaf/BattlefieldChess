@@ -37,7 +37,11 @@ public class Board extends Copyable<Board> {
   }
 
   public Position getPosition(int x, int y) {
-    return POSITIONS[x - 1][y - 1];
+    try {
+      return POSITIONS[x - 1][y - 1];
+    } catch (IndexOutOfBoundsException e) {
+      return null;
+    }
   }
 
   public void setPosition(int x, int y, Position position) {
