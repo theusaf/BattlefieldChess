@@ -1,5 +1,7 @@
 package org.theusaf.BattlefieldChess.util;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * Represents a cloneable object.
  * This class is meant to be extended with <code>CopyType</code> set to the class that is extending this.
@@ -69,7 +71,7 @@ public class Copyable<CopyType> {
    *
    * @return The clone of the object
    */
-  protected CopyType copySpecific() {
+  protected CopyType copySpecific() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
     return null;
   }
 

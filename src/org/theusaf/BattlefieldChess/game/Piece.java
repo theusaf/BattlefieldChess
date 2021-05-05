@@ -3,6 +3,9 @@ package org.theusaf.BattlefieldChess.game;
 import org.theusaf.BattlefieldChess.game.piecefilters.PieceMovementFilter;
 import org.theusaf.BattlefieldChess.util.Copyable;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * Represents a piece on the board.
  */
@@ -233,8 +236,10 @@ public class Piece extends Copyable<Piece> {
    *
    * @return The clone of this piece
    */
-  protected Piece copySpecific() {
-    Piece clone = new Piece(this.board, position, team); // create new piece with current board, position, and team
+  protected Piece copySpecific() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    Class<? extends Piece> classType = getClass();
+    Constructor<? extends Piece> specificConstructor = classType.getConstructor(Board.class, Position.class, GameTeam.class);
+    Piece clone = specificConstructor.newInstance(this.board, position, team); // create new piece with current board, position, and team
     Board board = this.board.copy(); // create a new board with cloned positions
     if (character != null) {
       clone.setCharacter(character.copy()); // copy character data
