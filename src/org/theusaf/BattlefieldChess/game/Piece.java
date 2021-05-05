@@ -237,20 +237,14 @@ public class Piece extends Copyable<Piece> {
    * @return The clone of this piece
    */
   protected Piece copySpecific() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-    Class<? extends Piece> classType = getClass();
-    Constructor<? extends Piece> specificConstructor = classType.getConstructor(Board.class, Position.class, GameTeam.class);
-    Piece clone = specificConstructor.newInstance(this.board, position, team); // create new piece with current board, position, and team
-    Board board = this.board.copy(); // create a new board with cloned positions
-    if (character != null) {
-      clone.setCharacter(character.copy()); // copy character data
-    }
+    Piece clone = copySpecific(true);
+    Board boardClone = clone.getBoard();
     if (position != null) {
       Position positionClone = position.copy(true); // set position to a new position at same x and y
       positionClone.setPiece(clone); // assign clone to new empty position
       clone.setPosition(positionClone); // assign cloned position to cloned piece
-      board.setPosition(positionClone.getX(), positionClone.getY(), positionClone); // reassign cloned position to board
+      boardClone.setPosition(positionClone.getX(), positionClone.getY(), positionClone); // reassign cloned position to board
     }
-    clone.setBoard(board); // update board of piece
     return clone;
   }
 
@@ -262,13 +256,15 @@ public class Piece extends Copyable<Piece> {
    *
    * @return The clone of this piece
    */
-  protected Piece copySpecific(Object... args) {
-    Piece clone = new Piece(this.board, position, team); // create a new piece with current board, team, and position
+  protected Piece copySpecific(Object... args) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+    Class<? extends Piece> classType = getClass();
+    Constructor<? extends Piece> specificConstructor = classType.getConstructor(Board.class, Position.class, GameTeam.class);
+    Piece clone = specificConstructor.newInstance(this.board, position, team); // create new piece with current board, position, and team
+    Board board = this.board.copy(); // create a new board with cloned positions
     if (character != null) {
       clone.setCharacter(character.copy()); // copy character data
     }
-    Board board = this.board.copy(); // create a clone of the board
-    clone.setBoard(board); // update board
+    clone.setBoard(board); // update board of piece
     return clone;
   }
 

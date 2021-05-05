@@ -82,7 +82,7 @@ public class Copyable<CopyType> {
    * @param args The arguments
    * @return The clone of the object
    */
-  protected CopyType copySpecific(Object... args) {
+  protected CopyType copySpecific(Object... args) throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
     return null;
   }
 
